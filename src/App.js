@@ -8,13 +8,15 @@ import './App.css';
 function App() {
     // use state returns an array of two indexes = variable of state // function used to update state
 
-    // WHY DOESN'T IT ACCEPT posts AS AN ARRAY? ERROR: Objects are not valid as a React child (found: object with keys {title, imgURL, count}). If you meant to render a collection of children, use an array instead.
-    const [count, setCount] = useState(posts);
+    const postsString = posts[0].count.toString();
+    const [count, setCount] = useState(postsString);
 
-    function incrementCount(pet) {
-        setCount(posts.map(post =>
-            post.title === pet ? { ...post, count: post.count + 1 } : post
-        ))
+    function incrementCount() {
+        console.log('firing');
+        setCount((newCount) => newCount + 1);
+        // setCount(posts.map(post =>
+        //     post.title === pet ? { ...post, count: post.count + 1 } : post
+        // ))
     }
 
     function decrementCount() {

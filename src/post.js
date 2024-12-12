@@ -10,9 +10,9 @@ function Post({ title, imgURL, count, incrementCount, decrementCount }) {
             <p>{titled}</p>
             <img alt='test' src={`/images/${imageURL}`} />
             <div className="button-wrapper">
-                <button onClick={decrementCount(title)}>-</button>
+                <button onClick={decrementCount}>-</button>
                 <p>{count}</p>
-                <button onClick={       incrementCount(title)}>+</button>
+                <button onClick={       incrementCount}>+</button>
             </div>
         </div>
     )
