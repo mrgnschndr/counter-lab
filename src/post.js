@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 
-function Post({ title, imgURL }) {
+function Post({ title, imgURL, count, incrementCount, decrementCount }) {
     let titled = title;
     let imageURL = imgURL;
-    console.log(imageURL);
-
-    const [count, setCount] = useState(0);
-
-    function incrementCount() {
-        setCount((prevCount) => prevCount + 1)
-    }
-    function decrementCount() {
-        setCount((prevCount) => prevCount - 1)
-    }
+    console.log(count);
 
     return (
         <div className="post-container">
             <p>{titled}</p>
             <img alt='test' src={`/images/${imageURL}`} />
             <div className="button-wrapper">
-                <button onClick={decrementCount}>-</button>
+                <button onClick={decrementCount(title)}>-</button>
                 <p>{count}</p>
-                <button onClick={incrementCount}>+</button>
+                <button onClick={       incrementCount(title)}>+</button>
             </div>
         </div>
     )

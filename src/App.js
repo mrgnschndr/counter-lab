@@ -1,19 +1,49 @@
 import React, {useState} from "react";
 import Post from './post.js';
 import posts from './counterpost.json';
+import Featured from './Featured.js';
 import './App.css';
 
 
 function App() {
     // use state returns an array of two indexes = variable of state // function used to update state
-    const [count, setCount] = useState(0);
 
-    function incrementCount() {
-        setCount((prevCount) => prevCount + 1)
+    // WHY DOESN'T IT ACCEPT posts AS AN ARRAY? ERROR: Objects are not valid as a React child (found: object with keys {title, imgURL, count}). If you meant to render a collection of children, use an array instead.
+    const [count, setCount] = useState(posts);
+
+    function incrementCount(pet) {
+        setCount(posts.map(post =>
+            post.title === pet ? { ...post, count: post.count + 1 } : post
+        ))
     }
+
     function decrementCount() {
-        setCount((prevCount) => prevCount - 1)
+        setCount((newCount) => newCount - 1)
     }
+
+    const [featured, setFeatured] = useState(false);
+
+    function isFeatured() {
+        // let auditVotes = [];
+        // console.log('count', count);
+        // for (let i = 0; i < posts.length - 1; i++) {
+        //     auditVotes[i] = posts.count;
+        //     console.log(auditVotes);
+        // }
+        // console.log(auditVotes);
+        // if (Math.max(...auditVotes) == count) {
+        //     setFeatured(true);
+        // }
+        // if (featured) {
+        //     console.log('Featured:', featured);
+        // }
+        // let featTitle = 'Acie';
+        // let featImgURL = 'Acie';
+        // let featCount = 'Acie';
+        // return featTitle;
+    }
+
+    let featTitle = 'Acie is the featured pet!';
 
     // a grid of photos
     // use the counter and every photo has a counter
@@ -27,16 +57,23 @@ function App() {
 
     return (
         <div>
-            <button onClick={decrementCount}>-</button>
-            <p>{count}</p>
-            <button onClick={incrementCount}>+</button>
+            <div className="featured-section">
+                <Featured
+                title = {featTitle}
+                // imgURL = {featImgURL}
+                // count = {featCount}
+                checkFeatured = {isFeatured}
+                />
+            </div>
             <div className="post-grid">
                 {posts.map((post, index) => (
                     <Post className="posts"
                     key = {index}
                     title = {post.title}
                     imgURL = {post.imgURL}
-                    count = {post.count}
+                    count = {count}
+                    incrementCount = {incrementCount}
+                    decrementCount = {decrementCount}
                     />
                 ))}
             </div>
