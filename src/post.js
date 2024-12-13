@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function Post({ title, imgURL, count, incrementCount, decrementCount }) {
     let titled = title;
@@ -12,7 +12,7 @@ function Post({ title, imgURL, count, incrementCount, decrementCount }) {
             <div className="button-wrapper">
                 <button onClick={decrementCount}>-</button>
                 <p>{count}</p>
-                <button onClick={       incrementCount}>+</button>
+                <button onClick={       incrementCount(titled)}>+</button>
             </div>
         </div>
     )

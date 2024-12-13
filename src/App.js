@@ -8,15 +8,24 @@ import './App.css';
 function App() {
     // use state returns an array of two indexes = variable of state // function used to update state
 
-    const postsString = posts[0].count.toString();
+    const postsString = posts.map(post =>
+        post.count.toString());
+    console.log('postsString', postsString);
     const [count, setCount] = useState(postsString);
 
-    function incrementCount() {
-        console.log('firing');
-        setCount((newCount) => newCount + 1);
-        // setCount(posts.map(post =>
-        //     post.title === pet ? { ...post, count: post.count + 1 } : post
-        // ))
+    function incrementCount(title) {
+        console.log(title);
+        // loop over the todos list and find the provided id.
+        let updatedList = postsString.map(newCount => 
+            {
+            if (newCount.title == title){
+                return {...title, count: newCount + 1};
+            }
+            return count; 
+            });
+        
+        setCount({postsString: updatedList}); // set state to new object with updated list
+
     }
 
     function decrementCount() {
@@ -73,7 +82,7 @@ function App() {
                     key = {index}
                     title = {post.title}
                     imgURL = {post.imgURL}
-                    count = {count}
+                    count = {post.count}
                     incrementCount = {incrementCount}
                     decrementCount = {decrementCount}
                     />
