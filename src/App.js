@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Post from "./post.js";
 import initialPosts from "./counterpost.json";
 import Topdog from "./Topdog.js";
+import UnderDog from "./UnderDog.js"
 import "./App.css";
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
 
   const [posts, setPosts] = useState(initialPosts);
   const [topDog, setTopDog] = useState(null);
+  const [underDog, setUnderDog] = useState(null);
 
   // Function to update votes
   const updateVote = (title, increment) => {
@@ -27,7 +29,14 @@ function App() {
       posts[0]
     );
 
+    // Find the post with the lowest count
+    const currentUnderDog = posts.reduce(
+        (min, post) => (post.count < min.count ? post : min),
+        posts[0]
+    );
+
     setTopDog(currentTopDog);
+    setUnderDog(currentUnderDog);
   }, [posts]);
 
   return (
@@ -40,6 +49,15 @@ function App() {
           count={topDog.count}
           onVote={updateVote}
         />
+      )}
+
+      {underDog && (
+        <UnderDog
+        title={underDog.title}
+        imgURL={underDog.imgURL}
+        count={underDog.count}
+        onVote={updateVote}
+      />
       )}
 
       <div className="post-grid">
