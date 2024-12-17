@@ -1,5 +1,11 @@
 import React from 'react';
 
+// Topdog component: Displays information about a top-rated dog
+// Props:
+// - title: Name or description of the dog
+// - imgURL: Filename of the dog's image
+// - count: Current vote count for the dog
+// - onVote: Callback function to handle voting
 function Topdog({ title, imgURL, count, onVote }) {
     return (
         <div className="top-dog-container">
